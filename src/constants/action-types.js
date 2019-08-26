@@ -1,0 +1,1 @@
+export const SEND_RESPONSE = 'SEND_RESPONSE';
