@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
 const StyledFooter = styled.div`
-	flex: 0 1 50px;
+	padding: 20px 0;
+	// flex: 0;
 	display: flex;
     justify-content: space-around;
     align-self: center;

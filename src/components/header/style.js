@@ -2,16 +2,15 @@ import styled from 'styled-components';
 
 
 const Wrapper = styled.div`
-    flex: 0 1 auto;
     background-color: #50AADD;
     color: #FFF;
-    padding: 20px;
+    padding: 15px 20px;
     display: flex;
     box-shadow: 0px 1px 4px 1px rgba(0,0,0,0.5);
 `;
 
 const Avatar = styled.div`
-    padding: 0 20px 0 0;
+    padding: 10px 20px 0 0;
 `;
 
 const Title = styled.div`

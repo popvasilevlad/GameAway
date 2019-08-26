@@ -6,7 +6,6 @@ const Footer = () => (
 	<StyledFooter>
 		<ActionBullet
 			value={-1}
-			onClick={() => console.log('-1')}
 		/>
 		<ActionBullet
 			value={0}
