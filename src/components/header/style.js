@@ -10,7 +10,7 @@ const Wrapper = styled.div`
 `;
 
 const Avatar = styled.div`
-    flex-basis: 25%;
+    padding: 0 20px 0 0;
 `;
 
 const Title = styled.div`

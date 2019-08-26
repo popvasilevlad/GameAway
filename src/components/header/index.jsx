@@ -1,13 +1,14 @@
 import React from 'react';
 import StyledHeader from './style';
-import Avatar from '../avatar';
+import Avatar from '../avatar/';
 
 const Header = () => {
-  
     return (
       <StyledHeader.Wrapper>
         <StyledHeader.Avatar>
-          <Avatar />
+          <Avatar
+            theme={'active'}
+          />
         </StyledHeader.Avatar>
         <div>
           <StyledHeader.Title>
