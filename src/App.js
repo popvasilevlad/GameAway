@@ -1,5 +1,7 @@
 import React from 'react';
 import Header from './components/header/';
+import Container from './components/container/';
+import Footer from './components/footer/';
 import { connect } from 'react-redux';
 
 const mapStateToProps = state => {
@@ -13,6 +15,8 @@ class App extends React.Component {
     return (
       <>
         <Header data={this.props.data}/>
+        <Container />
+        <Footer />
       </>
     );
   }
