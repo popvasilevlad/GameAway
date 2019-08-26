@@ -1,7 +1,7 @@
 import * as ACTIONS from '../constants/action-types';
 
 const initialState = {
-    data: ''
+    data: 'Game Title'
 };
 
 function rootReducer(state = initialState, action) {
