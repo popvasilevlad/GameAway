@@ -1,5 +1,6 @@
 {
   "name": "game-away",
+  "author": "Vlad Pop",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

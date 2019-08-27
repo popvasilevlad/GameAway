@@ -14,6 +14,7 @@ const messageStyleMap = {
 const Wrapper = styled.div`
 	padding: 20px;
 	height: 100%;
+	position: relative;
 `;
 
 const MessageGroup = styled.div`

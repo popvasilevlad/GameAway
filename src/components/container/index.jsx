@@ -3,10 +3,11 @@ import StyledContainer from './style';
 import Avatar from '../avatar/';
 import ActionBullet from '../action-bullet/';
 import MessageBox from '../message-box/';
+import GameOverScreen from '../game-over-screen/';
 
-const Container = () => (
+const Container = props => (
 	<StyledContainer.Wrapper>
-		
+		<GameOverScreen />
 		<StyledContainer.MessageGroup
 			direction={'left'}
 		>
