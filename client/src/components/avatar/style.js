@@ -7,7 +7,7 @@ const themeMap = {
 	}
 }
 
-const Wrapper = styled.div`
+const StyledAvatar = styled.div`
 	background-color: ${props => themeMap.bgColor[props.theme] || themeMap.bgColor.default};
 	border-radius: 50%;
 	height: 40px;
@@ -21,10 +21,6 @@ const Wrapper = styled.div`
     	width: 85%;
     }
 `;
-
-const StyledAvatar = {
-	Wrapper
-};
 
 
 export default StyledAvatar;

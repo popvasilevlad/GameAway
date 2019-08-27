@@ -6,17 +6,28 @@ import { connect } from 'react-redux';
 
 const mapStateToProps = state => {
     return {
-        data: state.data
+        data: state.data,
+        over: state.over
     }
 }
 
 class App extends React.Component {
   render() {
+
+    const fetchHeaders = {
+      headers : { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+      }
+    }
+
+    fetch('/data');
+
     return (
       <>
         <Header data={this.props.data}/>
         <Container />
-        <Footer />
+        {!this.props.over && <Footer />}
       </>
     );
   }
