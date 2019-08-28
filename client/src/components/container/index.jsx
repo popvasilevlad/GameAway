@@ -16,7 +16,26 @@ const {
 const Container = props => (
 	<Wrapper>
 		{ props.over && <GameOverScreen />}
-		<MessageGroup
+		{
+			props.entries.map((entry, i) => (
+				<MessageGroup
+					direction={i%2 === 0 ? 'left' : 'right'}
+					key={`message-group-${i}`}
+				>
+					<Avatar>
+						<UserAvatar />
+					</Avatar>
+					<ResponseMessagesContainer
+						direction={i%2 === 0 ? 'left' : 'right'}
+					>
+							{entry.added_value && <ActionBullet value={entry.added_value}/>}
+							{entry.formula && <MessageBox text={entry.formula} />}
+							{entry.result && <MessageBox text={entry.result} />}
+					</ResponseMessagesContainer>
+				</MessageGroup>
+			))
+		}
+		{/* <MessageGroup
 			direction={'left'}
 		>
 			<Avatar>
@@ -44,13 +63,14 @@ const Container = props => (
 				<MessageBox text={'[(-1 + 19 ) / 3] = 6'} />
 				<MessageBox text={'6'} />
 			</ResponseMessagesContainer>
-		</MessageGroup>
+		</MessageGroup> */}
 	</Wrapper>
 );
 
 const mapStateToProps = state => {
 	return {
-		over: state.over
+		over: state.over,
+		entries: state.entries
 	}
 }
 
