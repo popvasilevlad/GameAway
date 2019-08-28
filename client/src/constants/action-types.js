@@ -1,1 +1,1 @@
-export const SEND_RESPONSE = 'SEND_RESPONSE';
+export const FETCH_DATA = 'FETCH_DATA';

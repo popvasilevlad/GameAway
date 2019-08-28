@@ -1,8 +1,8 @@
 import * as ACTIONS from '../constants/action-types';
 
-export function sendResponse(payload) {
+export function fetchData(payload) {
     return {
-        type: ACTIONS.SEND_RESPONSE,
+        type: ACTIONS.FETCH_DATA,
         payload
     }
 }

@@ -3,6 +3,7 @@ import Header from './components/header/';
 import Container from './components/container/';
 import Footer from './components/footer/';
 import { connect } from 'react-redux';
+import { fetchDataOnLoad } from './sockets';
 
 const mapStateToProps = state => {
     return {
@@ -12,20 +13,14 @@ const mapStateToProps = state => {
 }
 
 class App extends React.Component {
+  componentDidMount() {
+    fetchDataOnLoad();
+  }
+
   render() {
-
-    const fetchHeaders = {
-      headers : { 
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-      }
-    }
-
-    fetch('/data');
-
     return (
       <>
-        <Header data={this.props.data}/>
+        <Header />
         <Container />
         {!this.props.over && <Footer />}
       </>

@@ -1,16 +1,20 @@
 import * as ACTIONS from '../constants/action-types';
 
 const initialState = {
-    data: 'Game Title',
+    game_room_id: '',
+    game_room_title: '',
+    game_room_subtitle: '',
+    loading: true,
     win: false,
     over: false
 };
 
 function rootReducer(state = initialState, action) {
-    if (action.type === ACTIONS.SEND_RESPONSE) {
+    if (action.type === ACTIONS.FETCH_DATA) {
         return Object.assign({}, state, {
-            data: action.payload
-        })
+            ...action.payload,
+            loading: false
+        });
     }
 
     return state;
