@@ -4,6 +4,7 @@ import Container from './components/container/';
 import Footer from './components/footer/';
 import { connect } from 'react-redux';
 import { fetchDataOnLoad } from './sockets';
+import cookie from 'react-cookies';
 
 const mapStateToProps = state => {
     return {
