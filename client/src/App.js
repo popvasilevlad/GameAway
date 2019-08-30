@@ -3,7 +3,6 @@ import Header from './components/header/';
 import Container from './components/container/';
 import Footer from './components/footer/';
 import { connect } from 'react-redux';
-import { fetchDataOnLoad } from './sockets';
 import cookie from 'react-cookies';
 
 const mapStateToProps = state => {
@@ -14,10 +13,6 @@ const mapStateToProps = state => {
 }
 
 class App extends React.Component {
-  componentDidMount() {
-    fetchDataOnLoad();
-  }
-
   render() {
     return (
       <>
