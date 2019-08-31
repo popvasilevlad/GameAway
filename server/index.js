@@ -57,11 +57,29 @@ io
 			io.of('/games').in(roomId).emit('game_over', gameRooms[roomId].winner);
 		};
 	});
+
+	socket.on("start_new_game", () => {
+		const roomId = Object.keys(socket.rooms)[0];
+		resetRoomState(roomId, socket);
+		io.of('/games').in(roomId).emit('start_new_game_success', gameRooms[roomId]);
+	});
 	socket.on("disconnect", function() {console.log("Client disconnected")});
 });
 
 function checkIfGameEnded(roomId) {
 	return parseInt(gameRooms[roomId].currentResult) < 2;
+}
+
+function resetRoomState(roomId) {
+	const startingNumber = Math.floor(Math.random() * 100);
+	
+	gameRooms[roomId].winner = '';
+	gameRooms[roomId].currentResult = startingNumber;
+	gameRooms[roomId].entries = [{
+		result: startingNumber,
+		author: gameRooms[roomId].last_edit
+	}];
+
 }
 
 function addValue(data, roomId) {
@@ -90,8 +108,7 @@ function joinAvaiableRoom(socket) {
 }
 
 function createRoom(socket) {
-	// const startingNumber = Math.floor(Math.random() * 100);
-	const startingNumber = 6;
+	const startingNumber = Math.floor(Math.random() * 100);
 	let room = {
 		roomId: Math.floor(Math.random() * 1000), //check duplicates & greater than 3
 		player_1: socket.id,

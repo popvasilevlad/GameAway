@@ -47,11 +47,4 @@ const mapStateToProps = state => {
 	}
 }
 
-// const mapDispatchToProps = dispatch => {
-// 	return {
-// 		addValue: value => dispatch(addValue(value))
-// 	}
-// }
-
-// export default connect(mapStateToProps, mapDispatchToProps)(Footer);
 export default connect(mapStateToProps)(Footer);

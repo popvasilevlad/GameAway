@@ -21,7 +21,6 @@ function rootReducer(state = initialState, action) {
     }
 
     if (action.type === ACTIONS.ADDED_VALUE) {
-        console.log('add value', action.payload)
         return Object.assign({}, state, {
             entries: action.payload.entries,
             last_edit: action.payload.last_edit
@@ -29,9 +28,14 @@ function rootReducer(state = initialState, action) {
     }
 
     if (action.type === ACTIONS.GAME_OVER) {
-        console.log('GAME_OVER', action.payload)
         return Object.assign({}, state, {
             winner: action.payload
+        });
+    }
+
+    if (action.type === ACTIONS.STARTED_NEW_GAME) {
+        return Object.assign({}, state, {
+            ...action.payload
         });
     }
 

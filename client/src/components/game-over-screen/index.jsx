@@ -6,6 +6,7 @@ import LoseImage from './lose-image.png';
 import DrawImage from './draw-image.png';
 import { connect } from 'react-redux';
 import cookie from 'react-cookies';
+import { startNewGame } from '../../actions';
 
 const GameOverScreen = props => (
 	<Styled.Container>
@@ -30,7 +31,7 @@ const GameOverScreen = props => (
 			}
 			</div>
 			<Button
-				handleClick={() => console.log('click')}
+				handleClick={() => startNewGame()}
 			/>
 		</Styled.Wrapper>
 	</Styled.Container>

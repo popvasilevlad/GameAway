@@ -23,9 +23,20 @@ export function handleGameOver(payload) {
     }
 }
 
-export function addValue(value) {
+export function startedNewGame(payload) {
+    return {
+        type: ACTIONS.STARTED_NEW_GAME,
+        payload
+    }
+}
+
+export const addValue = value => {
 	socket.emit('add_value', {
 		value: value,
 		playerId: cookie.load('clientSessionId')
 	});
+}
+
+export const startNewGame = () => {
+	socket.emit('start_new_game');
 }
