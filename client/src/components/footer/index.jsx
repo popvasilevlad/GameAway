@@ -25,16 +25,16 @@ const Footer = props => {
 	return (
 		<StyledFooter>
 			<ActionBullet
-				value={-1}
-				onClick={() => props.addValue(-1)}
+				value={'-1'}
+				onClick={() => addValue('-1')}
 			/>
 			<ActionBullet
 				value={0}
-				onClick={() => props.addValue(0)}
+				onClick={() => addValue('0')}
 			/>
 			<ActionBullet
-				value={1}
-				onClick={() => props.addValue(1)}
+				value={'+1'}
+				onClick={() => addValue('+1')}
 			/>
 		</StyledFooter>
 	);
@@ -47,10 +47,11 @@ const mapStateToProps = state => {
 	}
 }
 
-const mapDispatchToProps = dispatch => {
-	return {
-		addValue: value => dispatch(addValue(value))
-	}
-}
+// const mapDispatchToProps = dispatch => {
+// 	return {
+// 		addValue: value => dispatch(addValue(value))
+// 	}
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Footer);
+// export default connect(mapStateToProps, mapDispatchToProps)(Footer);
+export default connect(mapStateToProps)(Footer);

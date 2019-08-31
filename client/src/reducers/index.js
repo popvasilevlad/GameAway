@@ -9,8 +9,7 @@ const initialState = {
     player_1: '',
     player_2: '',
     loading: true,
-    win: false,
-    over: false
+    winner: ''
 };
 
 function rootReducer(state = initialState, action) {
@@ -20,10 +19,19 @@ function rootReducer(state = initialState, action) {
             loading: false
         });
     }
-    if (action.type === ACTIONS.ADD_VALUE) {
+
+    if (action.type === ACTIONS.ADDED_VALUE) {
         console.log('add value', action.payload)
         return Object.assign({}, state, {
-             ...action.payload
+            entries: action.payload.entries,
+            last_edit: action.payload.last_edit
+        });
+    }
+
+    if (action.type === ACTIONS.GAME_OVER) {
+        console.log('GAME_OVER', action.payload)
+        return Object.assign({}, state, {
+            winner: action.payload
         });
     }
 

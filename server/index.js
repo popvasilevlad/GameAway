@@ -7,27 +7,78 @@ var server = app.listen(process.env.PORT || 8080, function() {
 	console.log('Listening on port 8080')
 });
 
-// let entries = [{
-// 	result: 20
-// },
-// {
-// 	added_value: -1,
-// 	formula: '3 -1',
-// 	result: '2'
-// }];
-
-let data = {
-	game_room_id: 1,
-	game_room_title: 'Scoober team',
-	game_room_subtitle: 'Win the game or win the job'
-};
-
 const gameRoomsArray = [];
 const availableGameRoomsArray = [];
 const gameRooms = {};
 
 var io = socket(server);
 
+io
+.of('/games')
+.on('connection', function(socket) {
+	const { roomId } = socket.handshake.query;
+	
+	let room;
+
+	if (roomId === 'undefined') {
+		if (!availableGameRoomsArray.length) {
+			room = createRoom(socket);
+		} else {
+			room = joinAvaiableRoom(socket);
+		}
+
+		socket.join(room.roomId);
+		
+		io.of('/games').in(room.roomId).emit('room_connection_success', {
+			data: room,
+			playerId: socket.id
+		});
+	} else {
+		if (gameRoomsArray.includes(parseInt(roomId))) {
+			socket.join(parseInt(roomId));
+			io.of('/games').in(roomId).emit('reconnect_to_room_success', gameRooms[roomId]);
+		} else {
+			socket.emit('find_room_fail');
+		}
+	}
+
+	socket.on("add_value", data => {
+		const roomId = Object.keys(socket.rooms)[0];
+
+		addValue(data, roomId);
+		
+		io.of('/games').in(roomId).emit('added_value', {
+			entries: gameRooms[roomId].entries,
+			last_edit: gameRooms[roomId].last_edit
+		});
+
+		if(checkIfGameEnded(roomId)) {
+			gameRooms[roomId].winner = data.playerId;
+			io.of('/games').in(roomId).emit('game_over', gameRooms[roomId].winner);
+		};
+	});
+	socket.on("disconnect", function() {console.log("Client disconnected")});
+});
+
+function checkIfGameEnded(roomId) {
+	return parseInt(gameRooms[roomId].currentResult) === 1;
+}
+
+function addValue(data, roomId) {
+	const { value, playerId } = data;
+	const lastResult = gameRooms[roomId].currentResult;
+	const newResult = parseInt((parseInt(value) + lastResult) / 3);
+	const formula = `[(${value} + ${lastResult}) / 3] = ${newResult}`;
+
+	gameRooms[roomId].entries.push({
+		added_value: value,
+		formula: formula,
+		result: newResult,
+		author: playerId
+	});
+	gameRooms[roomId].last_edit = playerId;
+	gameRooms[roomId].currentResult = newResult;
+}
 
 function joinAvaiableRoom(socket) {
 	const roomName = availableGameRoomsArray[0];
@@ -39,57 +90,23 @@ function joinAvaiableRoom(socket) {
 }
 
 function createRoom(socket) {
-	console.log('create room func')
+	const startingNumber = Math.floor(Math.random() * 100);
 	let room = {
-		roomId: Math.floor(Math.random() * 1000), //check duplicates
+		roomId: Math.floor(Math.random() * 1000), //check duplicates & not eguals 1
 		player_1: socket.id,
 		last_edit: socket.id,
 		entries: [{
-			result: Math.floor(Math.random() * 100)
+			result: startingNumber,
+			author: socket.id
 		}],
-		...data
+		currentResult: startingNumber,
+		game_room_id: 1,
+		game_room_title: 'Scoober team',
+		game_room_subtitle: 'Win the game or win the job'
 	};
 	availableGameRoomsArray.push(room.roomId);
 	gameRooms[room.roomId] = room;
 	gameRoomsArray.push(room.roomId);
 
-
 	return room;
 }
-
-
-io
-.of('/games')
-.on('connection', function(socket) {
-	console.log('\n\n============================================= \n');
-	socket.on('find_room', function() {
-		let room;
-
-		if (!availableGameRoomsArray.length) {
-			room = createRoom(socket);
-			socket.join(room.roomId);
-
-			io.of('/games').in(room.roomId).emit('create_room_success', room);
-		} else {
-			room = joinAvaiableRoom(socket);
-			socket.join(room.roomId);
-
-			io.of('/games').in(room.roomId).emit('find_room_success', room);
-		}
-
-		
-	})
-
-
-	socket.on('join_room', function(roomId) {
-		if (gameRoomsArray.includes(parseInt(roomId))) {
-			socket.join(roomId);
-			io.of('/games').in(roomId).emit('join_room_success', gameRooms[roomId]);
-		} else {
-			socket.emit('find_room_fail');
-		}
-	});
-	console.log('--------------------- gameRoomsArray = ', gameRoomsArray);
-	console.log('--------------------- gameRooms = ', gameRooms);
-});
-

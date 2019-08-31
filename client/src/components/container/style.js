@@ -37,9 +37,14 @@ const ResponseMessagesContainer = styled.div`
 	flex-wrap: ${props => messageStyleMap[props.direction].wrap};
 `;
 
+const EntriesWrapper = styled.div`
+	max-height: 400px;
+    overflow-y: auto;
+`;
 
 const StyledContainer = {
 	Wrapper,
+	EntriesWrapper,
 	MessageGroup,
 	Avatar,
 	ResponseMessagesContainer

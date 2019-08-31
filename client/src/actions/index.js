@@ -1,4 +1,6 @@
 import * as ACTIONS from '../constants/action-types';
+import socket from '../sockets';
+import cookie from 'react-cookies';
 
 export function fetchData(payload) {
     return {
@@ -7,9 +9,23 @@ export function fetchData(payload) {
     }
 }
 
-export function addValue(payload) {
+export function addedValue(payload) {
     return {
-        type: ACTIONS.ADD_VALUE,
+        type: ACTIONS.ADDED_VALUE,
         payload
     }
+}
+
+export function handleGameOver(payload) {
+    return {
+        type: ACTIONS.GAME_OVER,
+        payload
+    }
+}
+
+export function addValue(value) {
+	socket.emit('add_value', {
+		value: value,
+		playerId: cookie.load('clientSessionId')
+	});
 }

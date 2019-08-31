@@ -5,42 +5,52 @@ import ActionBullet from '../action-bullet/';
 import MessageBox from '../message-box/';
 import GameOverScreen from '../game-over-screen/';
 import { connect } from 'react-redux';
+import cookie from 'react-cookies';
 
 const {
 	Wrapper,
 	MessageGroup,
 	Avatar,
-	ResponseMessagesContainer
+	ResponseMessagesContainer,
+	EntriesWrapper
 } = StyledContainer;
 
-const Container = props => (
-	<Wrapper>
-		{ props.over && <GameOverScreen />}
-		{
-			props.entries.map((entry, i) => (
-				<MessageGroup
-					direction={i%2 === 0 ? 'left' : 'right'}
-					key={`message-group-${i}`}
-				>
-					<Avatar>
-						<UserAvatar />
-					</Avatar>
-					<ResponseMessagesContainer
-						direction={i%2 === 0 ? 'left' : 'right'}
+const Container = props => {
+	const playerId = cookie.load('clientSessionId');
+
+	return (
+		<Wrapper>
+			{ props.winner && <GameOverScreen />}
+			<EntriesWrapper>
+			{
+				props.entries.map((entry,i) => (
+					<MessageGroup
+						direction={entry.author === playerId ? 'right' : 'left'}
+						key={`message-group-${i}`}
 					>
-							{entry.added_value && <ActionBullet value={entry.added_value}/>}
-							{entry.formula && <MessageBox text={entry.formula} />}
-							{entry.result && <MessageBox text={entry.result} />}
-					</ResponseMessagesContainer>
-				</MessageGroup>
-			))
-		}
-	</Wrapper>
-);
+						<Avatar>
+							<UserAvatar
+								theme={entry.author !== playerId ? 'active' : 'default'}
+							/>
+						</Avatar>
+						<ResponseMessagesContainer
+							direction={entry.author === playerId ? 'right' : 'left'}
+						>
+								{entry.added_value && <ActionBullet value={entry.added_value}/>}
+								{entry.formula && <MessageBox text={entry.formula} />}
+								{entry.result && <MessageBox text={entry.result} />}
+						</ResponseMessagesContainer>
+					</MessageGroup>
+				))
+			}
+			</EntriesWrapper>
+		</Wrapper>
+	)
+};
 
 const mapStateToProps = state => {
 	return {
-		over: state.over,
+		winner: state.winner,
 		entries: state.entries,
 		align: state.align
 	}

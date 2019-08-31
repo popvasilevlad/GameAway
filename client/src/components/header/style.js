@@ -7,6 +7,7 @@ const Wrapper = styled.div`
     padding: 15px 20px;
     display: flex;
     box-shadow: 0px 1px 4px 1px rgba(0,0,0,0.5);
+    z-index: 1;
 `;
 
 const Avatar = styled.div`

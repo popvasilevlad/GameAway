@@ -1,6 +1,6 @@
 import io from 'socket.io-client';
 import store from '../store';
-import { fetchData } from '../actions';
+import { fetchData, addedValue, handleGameOver } from '../actions';
 import cookie from 'react-cookies';
 
 const clientSessionId = cookie.load('clientSessionId');
@@ -18,6 +18,14 @@ socket.on('room_connection_success', res => {
 
 socket.on('reconnect_to_room_success', data => {
 	store.dispatch(fetchData(data));
+});
+
+socket.on('added_value', data => {
+	store.dispatch(addedValue(data));
+});
+
+socket.on('game_over', data => {
+	store.dispatch(handleGameOver(data));
 });
 
 socket.on('find_room_fail', () => {

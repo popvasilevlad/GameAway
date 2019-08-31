@@ -8,7 +8,7 @@ import cookie from 'react-cookies';
 const mapStateToProps = state => {
     return {
         data: state.data,
-        over: state.over
+        winner: state.winner
     }
 }
 
@@ -18,7 +18,7 @@ class App extends React.Component {
       <>
         <Header />
         <Container />
-        {!this.props.over && <Footer />}
+        {!this.props.winner && <Footer />}
       </>
     );
   }
