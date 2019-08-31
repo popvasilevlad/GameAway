@@ -12,9 +12,11 @@ const messageStyleMap = {
 }
 
 const Wrapper = styled.div`
-	padding: 20px;
+	padding: 15px 17px;
 	height: 100%;
 	position: relative;
+	font-size: 12px;
+	color: #454649;
 `;
 
 const MessageGroup = styled.div`
@@ -25,12 +27,12 @@ const MessageGroup = styled.div`
 `;
 
 const Avatar = styled.div`
-	flex-basis: 40px;
+	flex-basis: 35px;
 	padding-top: 5px;
 `;
 
 const ResponseMessagesContainer = styled.div`
-	padding: 0 20px;
+	padding: 0 12px;
 	flex-basis: calc(100% - 120px);
 	display: flex;
 	flex-direction: column;

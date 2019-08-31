@@ -86,7 +86,7 @@ function addValue(data, roomId) {
 	const { value, playerId } = data;
 	const lastResult = gameRooms[roomId].currentResult;
 	const newResult = parseInt((parseInt(value) + lastResult) / 3);
-	const formula = `[(${value} + ${lastResult}) / 3] = ${newResult}`;
+	const formula = `[ ( ${value} + ${lastResult} ) / 3 ] = ${newResult}`;
 
 	gameRooms[roomId].entries.push({
 		added_value: value,
@@ -108,7 +108,8 @@ function joinAvaiableRoom(socket) {
 }
 
 function createRoom(socket) {
-	const startingNumber = Math.floor(Math.random() * 100);
+	// const startingNumber = Math.floor(Math.random() * 100);
+	const startingNumber = 3;
 	let room = {
 		roomId: Math.floor(Math.random() * 1000), //check duplicates & greater than 3
 		player_1: socket.id,

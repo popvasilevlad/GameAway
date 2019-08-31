@@ -10,15 +10,16 @@ const themeMap = {
 const StyledAvatar = styled.div`
 	background-color: ${props => themeMap.bgColor[props.theme] || themeMap.bgColor.default};
 	border-radius: 50%;
-	height: 40px;
-    width: 40px;
+	height: 36px;
+    width: 36px;
 	display: flex;
     justify-content: center;
     position: relative;
     img {
     	position: absolute;
     	top: -5px;
-    	width: 85%;
+    	width: 30px;
+    	height: 40px;
     }
 `;
 

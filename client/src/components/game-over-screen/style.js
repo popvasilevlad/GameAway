@@ -17,7 +17,8 @@ const Container = styled.div`
 
 const Wrapper = styled.div`
 	color: #FFF;
-	font-size: 48px;
+	font-size: 41px;
+    line-height: 41px;
 	font-weight: 500;
 `;
 

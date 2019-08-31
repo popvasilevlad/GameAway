@@ -1,19 +1,20 @@
 import styled from 'styled-components';
 
 const StyledButton = styled.button`
-	border-radius: 30px;
+	border-radius: 100px;
 	background-color: #FFF;
-	width: 275px;
-	height: 60px;
+	width: 245px;
+	height: 56px;
 	outline: 0;
 	border: 0;
 	cursor: pointer;
 	color: #4189BB;
-	font-size: 18px;
+	font-size: 16px;
 	font-weight: 600;
-	box-shadow: 1px 2px 1px 1px rgba(0,0,0,0.2);
+	margin: 16px 0;
+	box-shadow: 0 2px 4px 0 rgba(0,0,0,0.25);
 	&:hover {
-		box-shadow: 1px 2px 2px 1px rgba(0,0,0,0.3);
+		box-shadow:0 2px 4px 0 rgba(0,0,0,0.5);
 	}
 `;
 

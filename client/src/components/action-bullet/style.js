@@ -8,15 +8,15 @@ const buttonHoverStyling = () => `
 `;
 
 const StyledActionBullet = styled.div`
-	width: 60px;
-	height: 60px;
+    width: 56px;
+    height: 56px;
 	background-color: #50AADD;
 	border-radius: 50%;
 	color: #FFF;
 	text-align: center;
 	line-height: 60px;
-	font-size: 18px;
-	font-weight: 500;
+    font-size: 18px;
+    font-weight: 500;
 	${props => props.onClick ? buttonHoverStyling() : ''}
 `;
 
