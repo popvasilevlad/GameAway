@@ -6,3 +6,10 @@ export function fetchData(payload) {
         payload
     }
 }
+
+export function addValue(payload) {
+    return {
+        type: ACTIONS.ADD_VALUE,
+        payload
+    }
+}

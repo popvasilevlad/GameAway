@@ -5,6 +5,7 @@ const initialState = {
     game_room_title: '',
     game_room_subtitle: '',
     entries: [],
+    align: 'left',
     player_1: '',
     player_2: '',
     loading: true,
@@ -17,6 +18,12 @@ function rootReducer(state = initialState, action) {
         return Object.assign({}, state, {
             ...action.payload,
             loading: false
+        });
+    }
+    if (action.type === ACTIONS.ADD_VALUE) {
+        console.log('add value', action.payload)
+        return Object.assign({}, state, {
+             ...action.payload
         });
     }
 

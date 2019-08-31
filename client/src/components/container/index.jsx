@@ -35,42 +35,14 @@ const Container = props => (
 				</MessageGroup>
 			))
 		}
-		{/* <MessageGroup
-			direction={'left'}
-		>
-			<Avatar>
-				<UserAvatar />
-			</Avatar>
-			<ResponseMessagesContainer
-				direction={'left'}
-			>
-				<ActionBullet value={1}/>
-				<MessageBox text={'[(-1 + 19 ) / 3] = 6'} />
-				<MessageBox text={'6'} />
-			</ResponseMessagesContainer>
-		</MessageGroup>
-
-		<MessageGroup
-			direction={'right'}
-		>
-			<Avatar>
-				<Avatar />
-			</Avatar>
-			<ResponseMessagesContainer
-				direction={'right'}
-			>
-				<ActionBullet value={1}/>
-				<MessageBox text={'[(-1 + 19 ) / 3] = 6'} />
-				<MessageBox text={'6'} />
-			</ResponseMessagesContainer>
-		</MessageGroup> */}
 	</Wrapper>
 );
 
 const mapStateToProps = state => {
 	return {
 		over: state.over,
-		entries: state.entries
+		entries: state.entries,
+		align: state.align
 	}
 }
 

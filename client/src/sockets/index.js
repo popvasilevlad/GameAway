@@ -3,35 +3,20 @@ import store from '../store';
 import { fetchData } from '../actions';
 import cookie from 'react-cookies';
 
-let socket = io.connect('http://localhost:8080/games');
-
 const clientSessionId = cookie.load('clientSessionId');
 const roomId = cookie.load('roomId');
 
-if(!roomId) {
-	socket.emit('find_room');
-} else {
-	socket.emit('join_room', roomId);
-}
+const socket = io.connect(`http://localhost:8080/games`, {query:`roomId=${roomId}`});
 
-socket.on('create_room_success', data => {
-	if (cookie.load('clientSessionId')) return false;
-
-	cookie.save('roomId', data.roomId, { path: '/'});
-	cookie.save('clientSessionId', data.player_1, { path: '/'});
-	store.dispatch(fetchData(data));
-});
- 
-socket.on('find_room_success', data => {
-	if (cookie.load('clientSessionId')) return false;
-
-	cookie.save('roomId', data.roomId, { path: '/'});
-	cookie.save('clientSessionId', data.player_2, { path: '/'});
-	store.dispatch(fetchData(data));
+socket.on('room_connection_success', res => {
+	if (!cookie.load('clientSessionId')) {
+		cookie.save('roomId', res.data.roomId, { path: '/'});
+		cookie.save('clientSessionId', res.playerId, { path: '/'});
+	}
+	store.dispatch(fetchData(res.data));
 });
 
-socket.on('join_room_success', data => {
-	console.log('join_room_success', data);
+socket.on('reconnect_to_room_success', data => {
 	store.dispatch(fetchData(data));
 });
 
@@ -40,4 +25,3 @@ socket.on('find_room_fail', () => {
 });
 
 export default socket;
-// const socket = io.connect(`http://localhost:8080?clientSessionId=${clientSessionId}&&roomId=${roomId}`);
