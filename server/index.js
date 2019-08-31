@@ -53,7 +53,7 @@ io
 		});
 
 		if(checkIfGameEnded(roomId)) {
-			gameRooms[roomId].winner = data.playerId;
+			gameRooms[roomId].winner = gameRooms[roomId].currentResult === 0 ? 'draw' : data.playerId;
 			io.of('/games').in(roomId).emit('game_over', gameRooms[roomId].winner);
 		};
 	});
@@ -61,7 +61,7 @@ io
 });
 
 function checkIfGameEnded(roomId) {
-	return parseInt(gameRooms[roomId].currentResult) === 1;
+	return parseInt(gameRooms[roomId].currentResult) < 2;
 }
 
 function addValue(data, roomId) {
@@ -90,9 +90,10 @@ function joinAvaiableRoom(socket) {
 }
 
 function createRoom(socket) {
-	const startingNumber = Math.floor(Math.random() * 100);
+	// const startingNumber = Math.floor(Math.random() * 100);
+	const startingNumber = 6;
 	let room = {
-		roomId: Math.floor(Math.random() * 1000), //check duplicates & not eguals 1
+		roomId: Math.floor(Math.random() * 1000), //check duplicates & greater than 3
 		player_1: socket.id,
 		last_edit: socket.id,
 		entries: [{

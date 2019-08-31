@@ -3,6 +3,7 @@ import Styled from './style';
 import Button from '../button/';
 import WinImage from './win-image.png';
 import LoseImage from './lose-image.png';
+import DrawImage from './draw-image.png';
 import { connect } from 'react-redux';
 import cookie from 'react-cookies';
 
@@ -13,11 +14,19 @@ const GameOverScreen = props => (
 				props.winner === cookie.load('clientSessionId') ?
 					<Styled.WinImage src={WinImage} />
 				:
-					<Styled.LoseImage src={LoseImage} />
+					props.winner === 'draw' ? 
+						<Styled.LoseImage src={DrawImage} />
+					:
+						<Styled.LoseImage src={LoseImage} />
 			}
 			<div>
 			{
-				props.winner === cookie.load('clientSessionId') ? 'You won' : 'You lose'
+				props.winner === cookie.load('clientSessionId') ? 
+					'You won'
+				: props.winner === 'draw' ? 
+					'Draw'
+					:
+					'You lose'
 			}
 			</div>
 			<Button
