@@ -20,7 +20,7 @@ function rootReducer(state = initialState, action) {
         });
     }
 
-    if (action.type === ACTIONS.ADDED_VALUE) {
+    if (action.type === ACTIONS.ADD_VALUE) {
         return Object.assign({}, state, {
             entries: action.payload.entries,
             last_edit: action.payload.last_edit
@@ -33,9 +33,16 @@ function rootReducer(state = initialState, action) {
         });
     }
 
-    if (action.type === ACTIONS.STARTED_NEW_GAME) {
+    if (action.type === ACTIONS.NEW_GAME_STARTED) {
         return Object.assign({}, state, {
-            ...action.payload
+            ...action.payload,
+            loading: false
+        });
+    }
+
+    if (action.type === ACTIONS.START_NEW_GAME) {
+        return Object.assign({}, state, {
+            loading: action.payload
         });
     }
 

@@ -11,7 +11,7 @@ export function fetchData(payload) {
 
 export function addedValue(payload) {
     return {
-        type: ACTIONS.ADDED_VALUE,
+        type: ACTIONS.ADD_VALUE,
         payload
     }
 }
@@ -25,18 +25,27 @@ export function handleGameOver(payload) {
 
 export function startedNewGame(payload) {
     return {
-        type: ACTIONS.STARTED_NEW_GAME,
+        type: ACTIONS.NEW_GAME_STARTED,
         payload
     }
 }
 
-export const addValue = value => {
+export function startNewGame() {
+    console.log('start new Game')
+    startNewGameEmit();
+    return {
+        type: ACTIONS.START_NEW_GAME,
+        payload: true
+    }
+}
+
+export const playTurn = value => {
 	socket.emit('add_value', {
 		value: value,
 		playerId: cookie.load('clientSessionId')
 	});
 }
 
-export const startNewGame = () => {
+export const startNewGameEmit = () => {
 	socket.emit('start_new_game');
 }

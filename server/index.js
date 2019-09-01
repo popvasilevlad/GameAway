@@ -71,7 +71,7 @@ function checkIfGameEnded(roomId) {
 }
 
 function resetRoomState(roomId) {
-	const startingNumber = Math.floor(Math.random() * 100);
+	const startingNumber = Math.floor(Math.random() * 990 + 10);
 	
 	gameRooms[roomId].winner = '';
 	gameRooms[roomId].currentResult = startingNumber;
@@ -108,10 +108,9 @@ function joinAvaiableRoom(socket) {
 }
 
 function createRoom(socket) {
-	// const startingNumber = Math.floor(Math.random() * 100);
-	const startingNumber = 3;
+	const startingNumber = Math.floor(Math.random() * 990 + 10);
 	let room = {
-		roomId: Math.floor(Math.random() * 1000), //check duplicates & greater than 3
+		roomId: gameRoomsArray.length,
 		player_1: socket.id,
 		last_edit: socket.id,
 		entries: [{

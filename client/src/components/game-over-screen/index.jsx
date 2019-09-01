@@ -31,7 +31,7 @@ const GameOverScreen = props => (
 			}
 			</div>
 			<Button
-				handleClick={() => startNewGame()}
+				handleClick={props.startNewGame}
 			/>
 		</Styled.Wrapper>
 	</Styled.Container>
@@ -43,4 +43,10 @@ const mapStateToProps = state => {
 	}
 }
 
-export default connect(mapStateToProps)(GameOverScreen);
+const mapDispatchToProps = dispatch => {
+	return {
+		startNewGame: () => dispatch(startNewGame())
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(GameOverScreen);

@@ -2,7 +2,7 @@ import React from 'react';
 import StyledFooter from './style'
 import ActionBullet from '../action-bullet/';
 import { connect } from 'react-redux';
-import { addValue } from '../../actions';
+import { playTurn } from '../../actions';
 import cookie from 'react-cookies';
 
 const Footer = props => {
@@ -26,15 +26,15 @@ const Footer = props => {
 		<StyledFooter>
 			<ActionBullet
 				value={'-1'}
-				onClick={() => addValue('-1')}
+				onClick={() => playTurn('-1')}
 			/>
 			<ActionBullet
 				value={0}
-				onClick={() => addValue('0')}
+				onClick={() => playTurn('0')}
 			/>
 			<ActionBullet
 				value={'+1'}
-				onClick={() => addValue('+1')}
+				onClick={() => playTurn('+1')}
 			/>
 		</StyledFooter>
 	);

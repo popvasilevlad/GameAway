@@ -1,24 +1,31 @@
 import React from 'react';
 import StyledHeader from './style';
-import Avatar from '../avatar/';
+import AvatarIcon from '../avatar/';
 import { connect } from 'react-redux';
 
+const {
+  Wrapper,
+  Avatar,
+  Title,
+  Subtitle
+} = StyledHeader;
+
 const Header = props => (
-  <StyledHeader.Wrapper>
-    <StyledHeader.Avatar>
-      <Avatar
+  <Wrapper>
+    <Avatar>
+      <AvatarIcon
         theme={'active'}
       />
-    </StyledHeader.Avatar>
+    </Avatar>
     <div>
-      <StyledHeader.Title>
+      <Title>
         {props.game_room_title}
-      </StyledHeader.Title>
-      <StyledHeader.Subtitle>
+      </Title>
+      <Subtitle>
         {props.game_room_subtitle}
-      </StyledHeader.Subtitle>
+      </Subtitle>
     </div>
-  </StyledHeader.Wrapper>
+  </Wrapper>
 );
 
 const mapStateToProps = state => {
