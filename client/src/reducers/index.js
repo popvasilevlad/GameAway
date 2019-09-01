@@ -46,6 +46,12 @@ function rootReducer(state = initialState, action) {
         });
     }
 
+    if (action.type === ACTIONS.PLAYER_NAME_UPDATED) {
+        return Object.assign({}, state, {
+            [action.payload.player]: action.payload.player_data
+        });
+    }
+
     return state;
 }
 

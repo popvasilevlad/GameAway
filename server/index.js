@@ -54,15 +54,31 @@ io
 
 		if(checkIfGameEnded(roomId)) {
 			gameRooms[roomId].winner = gameRooms[roomId].currentResult === 0 ? 'draw' : data.playerId;
+			
 			io.of('/games').in(roomId).emit('game_over', gameRooms[roomId].winner);
 		};
 	});
 
 	socket.on("start_new_game", () => {
 		const roomId = Object.keys(socket.rooms)[0];
+		
 		resetRoomState(roomId, socket);
+		
 		io.of('/games').in(roomId).emit('start_new_game_success', gameRooms[roomId]);
 	});
+
+	socket.on("change_user_name", data => {
+		const roomId = Object.keys(socket.rooms)[0];
+		const playerToEdit = gameRooms[roomId].player_1.id === data.id ? 'player_1' : 'player_2';
+		
+		gameRooms[roomId][playerToEdit].name = data.name;
+		
+		socket.broadcast.to(roomId).emit('player_name_updated', {
+			player_data: gameRooms[roomId][playerToEdit],
+			player: playerToEdit
+		});
+	});
+
 	socket.on("disconnect", function() {console.log("Client disconnected")});
 });
 
@@ -101,7 +117,10 @@ function addValue(data, roomId) {
 function joinAvaiableRoom(socket) {
 	const roomName = availableGameRoomsArray[0];
 			
-	gameRooms[roomName].player_2 = socket.id;
+	gameRooms[roomName].player_2 = {
+		id: socket.id,
+		name: 'Player 2'
+	};
 	availableGameRoomsArray.shift();
 
 	return gameRooms[roomName];
@@ -109,9 +128,13 @@ function joinAvaiableRoom(socket) {
 
 function createRoom(socket) {
 	const startingNumber = Math.floor(Math.random() * 990 + 10);
+	
 	let room = {
 		roomId: gameRoomsArray.length,
-		player_1: socket.id,
+		player_1: {
+			id: socket.id,
+			name: 'Player 1'
+		},
 		last_edit: socket.id,
 		entries: [{
 			result: startingNumber,
@@ -119,7 +142,7 @@ function createRoom(socket) {
 		}],
 		currentResult: startingNumber,
 		game_room_id: 1,
-		game_room_title: 'Scoober team',
+		game_room_title: 'No opponent',
 		game_room_subtitle: 'Win the game or win the job'
 	};
 	availableGameRoomsArray.push(room.roomId);

@@ -14,6 +14,10 @@ const Wrapper = styled.div`
     box-sizing: border-box;
 `;
 
+const TitleWrapper = styled.div`
+    flex-grow: 1;
+`;
+
 const Avatar = styled.div`
     padding: 0 20px 0 0;
     margin: 6px 0 0;
@@ -29,11 +33,10 @@ const Subtitle = styled.div`
     line-height: 30px;
 `;
 
-const StyledHeader = {
+export const StyledHeader = {
     Wrapper,
     Avatar,
     Title,
+    TitleWrapper,
     Subtitle
-}
-
-export default StyledHeader;
+};

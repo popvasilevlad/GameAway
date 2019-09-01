@@ -30,18 +30,34 @@ export function startedNewGame(payload) {
     }
 }
 
+export function updatedNameHandle(payload) {
+    return {
+        type: ACTIONS.PLAYER_NAME_UPDATED,
+        payload
+    } 
+}
+
 export function startNewGame() {
-    console.log('start new Game')
     startNewGameEmit();
+
     return {
         type: ACTIONS.START_NEW_GAME,
         payload: true
     }
 }
 
+
+
+export const changeName = (id, name) => {
+    socket.emit('change_user_name', {
+        id,
+        name
+    });
+}
+
 export const playTurn = value => {
 	socket.emit('add_value', {
-		value: value,
+		value,
 		playerId: cookie.load('clientSessionId')
 	});
 }

@@ -1,6 +1,12 @@
 import io from 'socket.io-client';
 import store from '../store';
-import { fetchData, addedValue, handleGameOver, startedNewGame } from '../actions';
+import { 
+	fetchData,
+	addedValue,
+	handleGameOver,
+	startedNewGame,
+	updatedNameHandle
+} from '../actions';
 import cookie from 'react-cookies';
 
 const clientSessionId = cookie.load('clientSessionId');
@@ -32,8 +38,12 @@ socket.on('start_new_game_success', data => {
 	store.dispatch(startedNewGame(data));
 });
 
+socket.on('player_name_updated', data => {
+	store.dispatch(updatedNameHandle(data));
+});
+
 socket.on('find_room_fail', () => {
-	console.log('find_room_fail');
+	console.log('find_room_faill');
 });
 
 export default socket;

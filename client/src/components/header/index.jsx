@@ -1,37 +1,53 @@
 import React from 'react';
-import StyledHeader from './style';
+import UserInfo from '../user-info';
+import { StyledHeader } from './style';
 import AvatarIcon from '../avatar/';
 import { connect } from 'react-redux';
+import cookie from 'react-cookies';
 
 const {
   Wrapper,
   Avatar,
   Title,
+  TitleWrapper,
   Subtitle
 } = StyledHeader;
 
-const Header = props => (
-  <Wrapper>
-    <Avatar>
-      <AvatarIcon
-        theme={'active'}
+const Header = props => {
+  const { player_1, player_2 } = props;
+
+  const userData = player_1.id === cookie.load('clientSessionId') ? player_1 : player_2;
+  const opponentData = player_1.id !== cookie.load('clientSessionId') ? player_1 : player_2;
+
+  return (
+    <Wrapper>
+      <Avatar>
+        <AvatarIcon
+          theme={'active'}
+        />
+      </Avatar>
+      <TitleWrapper>
+        <Title>
+          {opponentData.name || 'Waiting...'}
+        </Title>
+        <Subtitle>
+          {props.game_room_subtitle}
+        </Subtitle>
+      </TitleWrapper>
+      <UserInfo
+        name={userData.name}
+        id={userData.id}
       />
-    </Avatar>
-    <div>
-      <Title>
-        {props.game_room_title}
-      </Title>
-      <Subtitle>
-        {props.game_room_subtitle}
-      </Subtitle>
-    </div>
-  </Wrapper>
-);
+    </Wrapper>
+  );
+}
 
 const mapStateToProps = state => {
   return {
     game_room_title: state.game_room_title,
-    game_room_subtitle: state.game_room_subtitle
+    game_room_subtitle: state.game_room_subtitle,
+    player_1: state.player_1,
+    player_2: state.player_2
   }
 }
 
