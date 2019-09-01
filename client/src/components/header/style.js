@@ -16,6 +16,7 @@ const Wrapper = styled.div`
 
 const Avatar = styled.div`
     padding: 0 20px 0 0;
+    margin: 6px 0 0;
 `;
 
 const Title = styled.div`
