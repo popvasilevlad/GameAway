@@ -1,0 +1,28 @@
+{
+  "name": "gameaway_app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "installServer": "cd ./server && npm install ",
+    "installClient": "cd ./client && npm install ",
+    "installApp": "concurrently --kill-others-on-fail \" npm run installServer \" \"npm run installClient\"",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "startServer": "cd ./server && node index.js",
+    "startClient": "cd ./client && npm start",
+    "startApp": "concurrently --kill-others-on-fail \"npm run startServer\" \"npm run startClient\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/popvasilevlad/GameAway.git"
+  },
+  "author": "Vlad Pop",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/popvasilevlad/GameAway/issues"
+  },
+  "homepage": "https://github.com/popvasilevlad/GameAway#readme",
+  "devDependencies": {
+    "concurrently": "^4.1.2"
+  }
+}
