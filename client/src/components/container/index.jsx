@@ -30,7 +30,7 @@ const Container = props => {
 					>
 						<Avatar>
 							<UserAvatar
-								theme={entry.author !== playerId ? 'default' : 'active'}
+								theme={entry.author !== playerId ? 'active' : 'default'}
 							/>
 						</Avatar>
 						<ResponseMessagesContainer

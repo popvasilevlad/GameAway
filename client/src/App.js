@@ -3,7 +3,6 @@ import Header from './components/header/';
 import Container from './components/container/';
 import Footer from './components/footer/';
 import { connect } from 'react-redux';
-import cookie from 'react-cookies';
 import Spinner from './components/spinner/';
 
 const mapStateToProps = state => {

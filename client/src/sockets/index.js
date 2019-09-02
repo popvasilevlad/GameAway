@@ -9,10 +9,9 @@ import {
 } from '../actions';
 import cookie from 'react-cookies';
 
-const clientSessionId = cookie.load('clientSessionId');
 const roomId = cookie.load('roomId');
 
-const socket = io.connect(`http://localhost:8080/games`, {query:`roomId=${roomId}`});
+const socket = io.connect(`http://localhost:8080/games`, { query:`roomId=${roomId}` });
 
 socket.on('room_connection_success', res => {
 	if (!cookie.load('clientSessionId')) {

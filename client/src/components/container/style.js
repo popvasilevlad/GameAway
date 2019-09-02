@@ -40,7 +40,7 @@ const ResponseMessagesContainer = styled.div`
 `;
 
 const EntriesWrapper = styled.div`
-	max-height: 400px;
+	height: 100%;
     overflow-y: auto;
 `;
 

@@ -142,7 +142,6 @@ function createRoom(socket) {
 		}],
 		currentResult: startingNumber,
 		game_room_id: 1,
-		game_room_title: 'No opponent',
 		game_room_subtitle: 'Win the game or win the job'
 	};
 	availableGameRoomsArray.push(room.roomId);

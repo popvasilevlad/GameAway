@@ -2,7 +2,6 @@ import * as ACTIONS from '../constants/action-types';
 
 const initialState = {
     game_room_id: '',
-    game_room_title: '',
     game_room_subtitle: '',
     entries: [],
     align: 'left',
