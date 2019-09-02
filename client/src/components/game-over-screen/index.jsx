@@ -32,6 +32,7 @@ const GameOverScreen = props => (
 			</div>
 			<Button
 				handleClick={props.startNewGame}
+				text={'New Game'}
 			/>
 		</Styled.Wrapper>
 	</Styled.Container>

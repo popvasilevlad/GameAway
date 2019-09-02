@@ -39,6 +39,7 @@ const UserInfo = props => {
 			<Icon src={UserEditIcon} />
 			{editMode ?
 				<Input
+					className={'player-name-input'}
 					autoFocus
 					defaultValue={userName}
 					onKeyDown={handleKeyPress}

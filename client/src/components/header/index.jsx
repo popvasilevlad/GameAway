@@ -44,7 +44,6 @@ const Header = props => {
 
 const mapStateToProps = state => {
   return {
-    game_room_title: state.game_room_title,
     game_room_subtitle: state.game_room_subtitle,
     player_1: state.player_1,
     player_2: state.player_2

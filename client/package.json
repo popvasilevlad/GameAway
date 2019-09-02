@@ -36,7 +36,10 @@
   "jest": {
     "setupFilesAfterEnv": [
       "./jest-setup.js"
-    ]
+    ],
+    "moduleNameMapper": {
+      "\\.(png)$": "<rootDir>/__mocks__/fileMock.js"
+    }
   },
   "eslintConfig": {
     "extends": "react-app"

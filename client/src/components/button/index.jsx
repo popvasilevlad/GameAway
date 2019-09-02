@@ -5,7 +5,7 @@ const Button = props => (
 	<StyledButton
 		onClick={props.handleClick}
 	>
-		New Game
+		{props.text}
 	</StyledButton>
 );
 
